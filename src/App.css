@@ -37,3 +37,8 @@
     transform: translateY(0px);
   }
 }
+
+.form-error {
+  font-size: 1.4rem;
+  color: #b22b27;
+}
