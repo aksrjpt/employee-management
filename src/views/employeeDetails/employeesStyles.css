@@ -5,10 +5,25 @@
 
 .add-new-buttom {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 .form-error {
   font-size: 11px;
   color: indianred;
+}
+.delete-icon {
+  color: indianred !important;
+}
+
+.delete-button {
+  display: flex;
+  margin-top: 20px;
+  justify-content: end;
+}
+
+.delete-button button {
+  background-color: indianred;
+  border-color: indianred;
+  color: white;
 }

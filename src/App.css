@@ -38,7 +38,7 @@
   }
 }
 
-.form-error {
-  font-size: 1.4rem;
-  color: #b22b27;
+.no-access-image {
+  display: flex;
+  justify-content: center;
 }

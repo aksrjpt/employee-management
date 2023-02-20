@@ -3,10 +3,12 @@ import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import { Menu, MenuItem } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
+// import { useNavigate } from "react-router";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -38,6 +40,18 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Navbar = ({ open, toggleFunc }: toolbarStatus) => {
+  // const usenavigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const accountMenu = Boolean(anchorEl);
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar
@@ -66,11 +80,33 @@ const Navbar = ({ open, toggleFunc }: toolbarStatus) => {
         >
           Employee management
         </Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
+        <IconButton color="inherit" onClick={handleClick}>
+          <Badge
+            color="secondary"
+            aria-controls={accountMenu ? "account-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={accountMenu ? "true" : undefined}
+          >
+            <AccountCircle />
           </Badge>
         </IconButton>
+        <Menu
+          id="account-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={accountMenu}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu>
       </Toolbar>
     </AppBar>
   );

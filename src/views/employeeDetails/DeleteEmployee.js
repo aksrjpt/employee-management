@@ -1,6 +1,7 @@
 import { Delete } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import React, { useState } from "react";
+import { EmployeePageConstant } from "../../app/applicationConstants";
 import CommonDialog from "../../components/dialog/CommonDialog";
 import { useDeleteEmployeeMutation } from "../../services/employeesApi";
 
@@ -21,18 +22,20 @@ function DeleteEmployee({ type, rowID }) {
 
   return (
     <>
-      <Button color="secondary" onClick={handleClickOpen}>
+      <Button className="delete-icon" onClick={handleClickOpen}>
         <Delete />
       </Button>
       <CommonDialog
-        modalTitle="Delete"
+        modalTitle={EmployeePageConstant.DELETE_EMPLOYEE_TITLE}
         modalStatus={open}
         modalCloseFunc={handleClickClose}
       >
-        Are you sure, you want to delete
-        <Button variant="outlined" onClick={deleteEmployeeHandle}>
-          Delete
-        </Button>
+        {EmployeePageConstant.DELETE_EMPLOYE_ALERT}
+        <div className="delete-button">
+          <Button variant="outlined" onClick={deleteEmployeeHandle}>
+            Delete
+          </Button>
+        </div>
       </CommonDialog>
     </>
   );

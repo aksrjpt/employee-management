@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -7,8 +6,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import MuiDrawer from "@mui/material/Drawer";
 import LeftMenuItems from "./LeftMenu";
-import { useSelector } from "react-redux";
-import { useLazyAllEmployeesQuery } from "../../services/employeesApi";
 
 interface toolbarStatus {
   open?: boolean;

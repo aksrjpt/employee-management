@@ -8,7 +8,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -24,25 +23,20 @@ import InputField from "../../components/formElements/InputField";
 import CommonDatePicker from "../../components/formElements/CommonDatePicker";
 import CommonEmailInput from "../../components/formElements/CommonEmailInput";
 import CommonPhoneInput from "../../components/formElements/CommonPhoneInput";
+import Title from "../charts/Title";
+import {
+  EmployeeFormInitialValues,
+  EmployeePageConstant,
+} from "../../app/applicationConstants";
 
 const theme = createTheme();
 
 function AddEditEmployee(props: any) {
   const { type, rowData } = props;
   const [open, setOpen] = useState(false);
-  const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
+  const [createEmployee] = useCreateEmployeeMutation();
   const [updateEmployee] = useUpdateEmployeeMutation();
-  const initialValues: Employee = {
-    firstName: type === "edit" ? rowData?.firstName : "",
-    lastName: "edit" ? rowData?.lastName : "",
-    phoneNumber: "edit" ? rowData?.phoneNumber : "",
-    gender: "edit" ? rowData?.gender : "",
-    emailAddress: "edit" ? rowData?.emailAddress : "",
-    joinedDate: "edit" ? rowData?.joinedDate : "",
-    userId: "edit" ? rowData?.userId : "",
-    id: "edit" ? rowData?.id : "",
-  };
-
+  const initialValues: Employee = EmployeeFormInitialValues(type, rowData);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -50,6 +44,7 @@ function AddEditEmployee(props: any) {
       onSubmit: (values: Employee, action) => {
         if (type === "new") {
           createEmployee(values);
+          handleClickClose();
         } else {
           updateEmployee(values);
           handleClickClose();
@@ -73,6 +68,7 @@ function AddEditEmployee(props: any) {
         </Button>
       ) : (
         <div className="add-new-buttom">
+          <Title>{EmployeePageConstant.PAGE_TITLE}</Title>
           <Button
             onClick={handleClickOpen}
             variant="contained"
@@ -84,7 +80,11 @@ function AddEditEmployee(props: any) {
         </div>
       )}
       <CommonDialog
-        modalTitle={type === "new" ? "Add New Employee" : "Edit Employee"}
+        modalTitle={
+          type === EmployeePageConstant.NEW_TYPE
+            ? EmployeePageConstant.ADD_NEW_EMPLOYEE_TITLE
+            : EmployeePageConstant.EDIT_EMPLOYEE_TITLE
+        }
         modalStatus={open}
         modalCloseFunc={handleClickClose}
       >
@@ -104,7 +104,7 @@ function AddEditEmployee(props: any) {
                     blurFun={handleBlur}
                     changeFunc={handleChange}
                     nameID="firstName"
-                    label={"First Name"}
+                    label={EmployeePageConstant.FIRST_NAME_FORM_LABLE}
                   />
                   {errors.firstName && touched.firstName ? (
                     <p className="form-error">{errors.firstName}</p>
@@ -117,7 +117,7 @@ function AddEditEmployee(props: any) {
                     blurFun={handleBlur}
                     changeFunc={handleChange}
                     nameID="lastName"
-                    label={"Last Name"}
+                    label={EmployeePageConstant.LAST_NAME_FORM_LABLE}
                   />
                   {errors.lastName && touched.lastName ? (
                     <p className="form-error">{errors.lastName}</p>
@@ -125,26 +125,27 @@ function AddEditEmployee(props: any) {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl>
-                    <FormLabel id="demo-row-radio-buttons-group-label">
+                    {/* <FormLabel id="demo-row-radio-buttons-group-label">
                       Gender
-                    </FormLabel>
+                    </FormLabel> */}
                     <RadioGroup
                       row
                       id="gender"
                       name="gender"
+                      defaultValue="male"
                       value={values.gender}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
                       <FormControlLabel
-                        value="female"
-                        control={<Radio />}
-                        label="Female"
+                        value="male"
+                        control={<Radio size="small" />}
+                        label="Male"
                       />
                       <FormControlLabel
-                        value="male"
-                        control={<Radio />}
-                        label="Male"
+                        value="female"
+                        control={<Radio size="small" />}
+                        label="Female"
                       />
                     </RadioGroup>
                   </FormControl>
@@ -158,7 +159,7 @@ function AddEditEmployee(props: any) {
                     blurFun={handleBlur}
                     changeFunc={handleChange}
                     nameID="joinedDate"
-                    label={"Joining Date"}
+                    label={EmployeePageConstant.JOINING_DATE_FORM_LABLE}
                   />
                   {errors.joinedDate && touched.joinedDate ? (
                     <p className="form-error">Please enter Date</p>
@@ -170,7 +171,7 @@ function AddEditEmployee(props: any) {
                     blurFun={handleBlur}
                     changeFunc={handleChange}
                     nameID="emailAddress"
-                    label={"Email Address"}
+                    label={EmployeePageConstant.EMAIL_FORM_LABLE}
                   />
                   {errors.emailAddress && touched.emailAddress ? (
                     <p className="form-error">{errors.emailAddress}</p>
@@ -182,7 +183,7 @@ function AddEditEmployee(props: any) {
                     blurFun={handleBlur}
                     changeFunc={handleChange}
                     nameID="phoneNumber"
-                    label={"Phone Number"}
+                    label={EmployeePageConstant.PHONE_NUMBER_FORM_LABLE}
                   />
                   {errors.phoneNumber && touched.phoneNumber ? (
                     <p className="form-error">{errors.phoneNumber}</p>

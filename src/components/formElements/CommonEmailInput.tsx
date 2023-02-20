@@ -4,6 +4,7 @@ function CommonEmailInput({ value, blurFun, changeFunc, nameID, label }: any) {
   return (
     <>
       <TextField
+        size="small"
         fullWidth
         name={nameID}
         required

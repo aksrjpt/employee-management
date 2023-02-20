@@ -11,12 +11,12 @@ import {
 import Title from "./Title";
 import { Paper } from "@mui/material";
 import { useAllEmployeesQuery } from "../../services/employeesApi";
-import { useSelector } from "react-redux";
+import { ChartPageConstants } from "../../app/applicationConstants";
+import CircleLoader from "../../components/loader/CircleLoader";
 
 export default function Chart() {
   let chartData = [];
-  const { data, error, isLoading, isFetching, isSuccess } =
-    useAllEmployeesQuery();
+  const { data, isFetching } = useAllEmployeesQuery();
   if (data) {
     const d = new Date();
     const currentYear = d.getFullYear();
@@ -40,6 +40,7 @@ export default function Chart() {
           item.total += 1;
           item.gender === "male" ? (record.male += 1) : (record.female += 1);
         }
+        return item;
       });
       chartData.push(record);
     }
@@ -47,37 +48,43 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Employees joined in last 10 years</Title>
-      <Paper
-        sx={{
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          height: 500,
-        }}
-      >
-        <ResponsiveContainer>
-          <BarChart
-            width={500}
-            height={300}
-            data={chartData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
+      {isFetching ? (
+        <CircleLoader />
+      ) : (
+        <>
+          <Title>{ChartPageConstants.PAGE_TITLE}</Title>
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 500,
             }}
           >
-            {/* <CartesianGrid strokeDasharray="3 3" /> */}
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="female" stackId="a" fill="#d37593" />
-            <Bar dataKey="male" stackId="a" fill="#6ac0de" />
-          </BarChart>
-        </ResponsiveContainer>
-      </Paper>
+            <ResponsiveContainer>
+              <BarChart
+                width={500}
+                height={300}
+                data={chartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="female" stackId="a" fill="#d37593" />
+                <Bar dataKey="male" stackId="a" fill="#6ac0de" />
+              </BarChart>
+            </ResponsiveContainer>
+          </Paper>
+        </>
+      )}
     </React.Fragment>
   );
 }

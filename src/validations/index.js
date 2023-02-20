@@ -6,7 +6,7 @@ export const employeeForm = Yup.object({
     .max(25)
     .required("Please enter your First Name"),
   lastName: Yup.string().min(3).max(25).required("Please enter your Last Name"),
-  phoneNumber: Yup.number()
+  phoneNumber: Yup.string()
     .min(8)
     .max(8)
     .required("Phone number should be 8 Digit"),
