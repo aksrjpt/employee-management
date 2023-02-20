@@ -19,3 +19,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `json-server --watch db.json --port 5000`
 
 Runs the JSON server on the localhost:5000, I have created a file call db.json in the root dir of this project, this would ideally use that file for all server activites
+
+there are 2 user try to login by both:
+
+1. Admin user (User: admin, Password: admin) - Had Admin Access
+2. Standard user (User: atandard Password: standard) - Doesn't has Admin Access
