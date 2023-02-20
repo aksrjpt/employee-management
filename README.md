@@ -7,6 +7,10 @@ I have build this project using the following tecj:
 
 Follwing steps to run the project
 
+Clone the code and run as follow
+
+### `npm install`
+
 ### `npm start`
 
 Runs the app in the development mode.\
