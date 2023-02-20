@@ -6,5 +6,5 @@ export interface Employee {
   phoneNumber: number;
   gender: string;
   emailAddress: string;
-  joinedDate: number;
+  joinedDate: any;
 }

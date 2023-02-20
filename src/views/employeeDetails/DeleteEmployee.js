@@ -1,3 +1,4 @@
+import { Delete } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import CommonDialog from "../../components/dialog/CommonDialog";
@@ -20,8 +21,8 @@ function DeleteEmployee({ type, rowID }) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Delete Employee
+      <Button color="secondary" onClick={handleClickOpen}>
+        <Delete />
       </Button>
       <CommonDialog
         modalTitle="Delete"

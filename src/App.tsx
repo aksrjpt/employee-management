@@ -3,10 +3,10 @@ import Dashboard from "./views/dashboard/Dashboard";
 import LoginForm from "./views/loginScreen/LoginForm";
 
 function App() {
+  console.log(sessionStorage.getItem("user"));
   return (
     // <SampleCounter/>
-    // <LoginForm />
-    <Dashboard />
+    <>{sessionStorage.getItem("user") ? <Dashboard /> : <LoginForm />}</>
   );
 }
 

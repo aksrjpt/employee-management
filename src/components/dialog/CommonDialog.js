@@ -66,11 +66,11 @@ export default function CommonDialog(props) {
 
         <DialogContent dividers>{props.children}</DialogContent>
 
-        <DialogActions>
+        {/* <DialogActions>
           <Button autoFocus onClick={props.modalCloseFunc}>
             Save changes
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </BootstrapDialog>
     </div>
   );

@@ -1,0 +1,14 @@
+.actionIcons {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.add-new-buttom {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+}
+.form-error {
+  font-size: 11px;
+  color: indianred;
+}

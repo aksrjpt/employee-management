@@ -42,8 +42,11 @@ export const employeesApi = createApi({
 
 export const {
   useAllEmployeesQuery,
+  useLazyAllEmployeesQuery,
   useEmployeeQuery,
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,
   useDeleteEmployeeMutation,
 } = employeesApi;
+
+export const { endpoints, reducerPath, reducer, middleware } = employeesApi;
