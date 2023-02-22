@@ -80,7 +80,7 @@ export default function EmpTable({ isAdminUser }) {
         <CircleLoader />
       ) : (
         <>
-          <AddEditEmployee type={EmployeePageConstant.NEW_TYPE} />
+          {isAdminUser && <AddEditEmployee type={EmployeePageConstant.NEW_TYPE} /> }
           <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
             {!isLoading && (
               <>
